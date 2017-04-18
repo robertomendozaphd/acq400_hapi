@@ -20,15 +20,14 @@ Created on Sun Jan  8 12:36:38 2017
 
 import threading
 import re
-
 import os
 import errno
 import signal
 import sys
-import netclient
 import numpy
-
 import timeit
+from . import netclient
+
 
 class AcqPorts:
     """server port constants"""
@@ -38,6 +37,7 @@ class AcqPorts:
     TSTAT = 2235
     DATA0 = 53000
 
+
 class SF:
     """state constants"""
     STATE = 0
@@ -45,7 +45,8 @@ class SF:
     POST = 2
     ELAPSED = 3
     DEMUX = 5
-    
+
+
 class Channelclient(netclient.Netclient):
     """handles post shot data for one channel.
     

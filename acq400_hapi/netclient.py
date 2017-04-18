@@ -8,12 +8,9 @@ Created on Sun Jan  8 12:36:38 2017
 @author: pgm
 """
 
-
 import socket
 import re
 import sys
-
-
 
 
 class Netclient:
@@ -43,8 +40,7 @@ class Netclient:
         rc = self.buffer[:match.start(1)]            
         self.buffer = self.buffer[match.end(1):]
         return rc
-        
-                
+
     def __init__(self, addr, port) :
 #        print("Netclient.init")
         self.buffer = ""
@@ -68,11 +64,12 @@ class Netclient:
     def port(self):
         return self.__port
 
+
 class Logclient(Netclient):
     """Netclient optimised for logging, line by line"""
     def __init__(self, addr, port):
-       Netclient.__init__(self,addr, port)
-       self.termex = re.compile("(\r\n)")
+        Netclient.__init__(self, addr, port)
+        self.termex = re.compile("(\r\n)")
        
     def poll(self):
         return self.receive_message(self.termex)
@@ -195,41 +192,36 @@ def run_unit_test():
     svc.spad2 = "0x22222222"
     
     raise SystemExit
-    for key in svc.knobs:
-        cmd = svc.knobs[key]
-        if cmd.startswith("help"):
-            continue
-        print("%s %s" % (cmd, svc.sr(cmd)))
-
-    raise SystemExit
- 
-    while True:
-        try:
-            data = raw_input("Enter some data: ")
-        except EOFError:
-            print("\nOkay. Leaving. Bye")
-            break
-
-        print("Hello")
-
-        if not data:
-            print("Can't send empty string!")
-            print("Ctrl-D [or Ctrl-Z on Windows] to exit")
-            continue
-        print("< %s" % (data))
-
-        data += "\n"
-        svc.send(data)
-        data = svc.recv()
-        
-        print("Got this string from server:")
-        print(data + '\n')
+    # for key in svc.knobs:
+    #     cmd = svc.knobs[key]
+    #     if cmd.startswith("help"):
+    #         continue
+    #     print("%s %s" % (cmd, svc.sr(cmd)))
+    #
+    # raise SystemExit
+    #
+    # while True:
+    #     try:
+    #         data = raw_input("Enter some data: ")
+    #     except EOFError:
+    #         print("\nOkay. Leaving. Bye")
+    #         break
+    #
+    #     print("Hello")
+    #
+    #     if not data:
+    #         print("Can't send empty string!")
+    #         print("Ctrl-D [or Ctrl-Z on Windows] to exit")
+    #         continue
+    #     print("< %s" % (data))
+    #
+    #     data += "\n"
+    #     svc.send(data)
+    #     data = svc.recv()
+    #
+    #     print("Got this string from server:")
+    #     print(data + '\n')
 
 # excution starts here        
 if __name__ == '__main__':
     run_unit_test
-
-
-
-
-    
