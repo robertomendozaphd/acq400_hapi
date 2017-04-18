@@ -1,9 +1,11 @@
 import signal
 import time
 
+
 def sleep(secs):
-    print("sleep(%.2f)" % (secs))
+    print("sleep({:.2f})".format(secs))
     time.sleep(secs)
+
 
 class ExitCommand(Exception):
     pass
@@ -11,6 +13,7 @@ class ExitCommand(Exception):
     
 def signal_handler(signal, frame):
     raise ExitCommand()
+
 
 def init():
     signal.signal(signal.SIGINT, signal_handler)
